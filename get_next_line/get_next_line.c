@@ -84,9 +84,9 @@ char	*ft_read(int fd, char *save)
 			return (NULL);
 		}
 		buf[count] = '\0';
-		tmp = save;
-		save = gnl_strjoin(save, buf);
-		free(tmp);
+		tmp = gnl_strjoin(save, buf);
+		free(save);
+		save = tmp;
 	}
 	free(buf);
 	return (save);

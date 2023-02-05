@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	destory_image(t_mlx *mlx, t_img *img)
+void	destroy_image(t_mlx *mlx, t_img *img)
 {
 	mlx_destroy_image(mlx->mlx_ptr, img->f_img);
 	mlx_destroy_image(mlx->mlx_ptr, img->w_img);
@@ -26,7 +26,8 @@ void	destory_image(t_mlx *mlx, t_img *img)
 
 void	close_window(t_param *param)
 {
-	destory_image(param->mlx, param->img);
+	destroy_image(param->mlx, param->img);
+	free_mapdata(param->map->map_data,param->map->vertical);
 	mlx_destroy_window(param->mlx->mlx_ptr, param->mlx->win_ptr);
 	mlx_destroy_display(param->mlx->mlx_ptr);
 	free(param->mlx->mlx_ptr);

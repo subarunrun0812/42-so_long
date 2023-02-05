@@ -48,11 +48,10 @@ void	draw_one_img(t_param *param, int y, int x)
 	else if (param->map->map_data[y][x] == 'N')
 		mlx_put_image_to_window(param->mlx->mlx_ptr, param->mlx->win_ptr,
 			param->img->n_img, x * SIZE, y * SIZE);
-	else if (param->map->map_data[y][x] == 'E')
-		draw_one_anim_img(param, y, x);
-	else if (param->map->map_data[y][x] == 'P')
+	else if (param->map->map_data[y][x] == 'E' || param->map->map_data[y][x] == 'P')
 		draw_one_anim_img(param, y, x);
 }
+
 
 void	draw_map(t_map *map, t_mlx *mlx, t_img *img, t_anim *anim)
 {
@@ -77,11 +76,8 @@ void	draw_map(t_map *map, t_mlx *mlx, t_img *img, t_anim *anim)
 	}
 }
 
-void	draw(t_map *map, t_mlx *mlx, t_img *img)
+void	draw(t_map *map, t_mlx *mlx, t_img *img,t_anim *anim)
 {
-	t_anim	anim;
-
-	anim.p_dir = 0;
-	window_image_init(mlx, img, map);
-	draw_map(map, mlx, img, &anim);
+	window_image_init(mlx, img, map, anim);
+	draw_map(map, mlx, img, anim);
 }

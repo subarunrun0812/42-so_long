@@ -12,15 +12,15 @@
 
 #include "so_long.h"
 
-void	check_map_upperlower(char *width)
+void	check_map_upperlower(char *width, t_map *map)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (width[i])
+	while (width[i] != '\n')
 	{
 		if (width[i] != '1')
-			error(MAP_ERROR);
+			error_map(map->map_data, map->vertical, MAP_ERROR);
 		i++;
 	}
 }
@@ -30,16 +30,16 @@ void	check_map_wall(t_map *map)
 	int	i;
 
 	i = 0;
-	check_map_upperlower(map->map_data[i]);
+	check_map_upperlower(map->map_data[i], map);
 	i++;
 	while (i < map->vertical - 1)
 	{
 		if (map->map_data[i][0] != '1' ||
 			map->map_data[i][map->width - 1] != '1')
-			error(MAP_ERROR);
+			error_map(map->map_data, map->vertical, MAP_ERROR);
 		i++;
 	}
-	check_map_upperlower(map->map_data[i]);
+	check_map_upperlower(map->map_data[i], map);
 }
 
 void	count_special_words(t_num *num, t_map *map)
@@ -72,14 +72,14 @@ void	count_special_words(t_num *num, t_map *map)
 
 void	check_map_char(t_map *map)
 {
-	t_num	*num;
+	t_num	num;
 
-	num = (t_num *)malloc(sizeof(t_num));
-	num->c_num = 0;
-	num->e_num = 0;
-	num->p_num = 0;
-	count_special_words(num, map);
-	if (num->c_num < 1 || num->e_num != 1 || num->p_num != 1)
+	// num = (t_num *)malloc(sizeof(t_num));
+	num.c_num = 0;
+	num.e_num = 0;
+	num.p_num = 0;
+	count_special_words(&num, map);
+	if (num.c_num < 1 || num.e_num != 1 || num.p_num != 1)
 		error(MAP_ERROR);
 	return ;
 }

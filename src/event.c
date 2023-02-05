@@ -34,21 +34,19 @@ int	ft_key_hook(int keycode, t_param *param)
 	return (0);
 }
 
-void	ft_event(t_mlx *mlx, t_img *img, t_map *map)
+void	ft_event(t_mlx *mlx, t_img *img, t_map *map, t_anim *anim)
 {
 	t_param	param;
-	t_anim	anim;
 
 	param.mlx = mlx;
 	param.img = img;
 	param.map = map;
+	param.anim = anim;
 	param.c_count = 0;
 	param.c_num = get_c_num(map);
 	param.steps = 0;
 	param.e_flag = 0;
 	param.res = 0;
-	param.anim = &anim;
-	param.anim->p_dir = 0;
 	mlx_hook(mlx->win_ptr, ON_FOCUSLN, 1L << 21, &ft_resize_hook, &param);
 	mlx_hook(mlx->win_ptr, ON_KEYDOWN, 1L << 0, &ft_key_hook, &param);
 	mlx_hook(mlx->win_ptr, ON_DESTROY, 1L << 2, &ft_destroy_hook, &param);

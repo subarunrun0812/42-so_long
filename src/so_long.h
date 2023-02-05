@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdarg.h>
 # include <X11/keysymdef.h>
 # include "../get_next_line/get_next_line.h"
 # include "../minilibx-linux/mlx.h"
@@ -54,45 +55,58 @@ void	check_map(t_map *map);
 void	check_map_char(t_map *map);
 void	num_init(t_num *num);
 void	check_map_wall(t_map *map);
-void	check_map_upperlower(char *width);
+void	check_map_upperlower(char *width, t_map *map);
 
 //create_img.c
 void	*create_img(t_mlx *mlx, t_data *data, char *filename);
 void	*compare_image_data(t_mlx *mlx, t_data *tmp_data, t_data *floor_data);
 
 //close_window.c
-void	destory_image(t_mlx *mlx, t_img *img);
+void	destroy_image(t_mlx *mlx, t_img *img);
 void	close_window(t_param *param);
 
 //draw.c
-void	draw(t_map *map, t_mlx *mlx, t_img *img);
+void	draw(t_map *map, t_mlx *mlx, t_img *img,t_anim *anim);
 void	draw_map(t_map *map, t_mlx *mlx, t_img *img, t_anim *anim);
 void	draw_one_img(t_param *param, int y, int x);
 void	draw_one_anim_img(t_param *param, int y, int x);
+
+//error_mapdata.c
+void	free_mapdata_int(int **map_data,int vertical);
+void	free_mapdata(char **map_data,int vertical);
+void	error_map(char **mapdata, int vertical, int error_num);
+
 //error.c
 void	putstr_error(int error_num);
 void	error(int error_num);
+// void	error_handle(int error_num, ...);
+
+//mlx_error.c
+void	error_mlx_init(t_map *map);
+void	error_win_init(t_mlx *mlx, t_map *map);
+void	error_win_floor(t_mlx *mlx, t_map *map);
 
 //event.c
 int		key_hook(int keycode, t_param *param);
 int		ft_key_hook(int keycode, t_param *param);
 int		ft_expose_hook(t_param *param);
 int		ft_destroy_hook(t_param *param);
-void	ft_event(t_mlx *mlx, t_img *img, t_map *map);
+void	ft_event(t_mlx *mlx, t_img *img, t_map *map, t_anim *anim);
 
 //get_c_num.c
 int		get_c_num(t_map *map);
 
 //get_map_data.c
-void	*non_specific_character(char *str);
+int		non_specific_character(char *str);
 char	*check_n(char *str);
 char	**ft_stradd(char **array, char *new);
 void	get_map_size(t_map *map);
 void	get_map_data(int fd, t_map *map);
 
 //map.c
-void	filename_check(char *filename);
-t_map	ft_map(char *filename);
+// void	map_init(t_map *map);
+// void	filename_check(char *filename);
+void	ft_map(char *filename,t_map *map);
 
 // player_move.c
 void	arrival_img(t_param *param, t_pos *dst, t_pos *pos);
@@ -104,7 +118,9 @@ void	player_move(int move, t_param *param);
 void	player_steps(t_param *param);
 
 //window_img.c
+// int		num_make(t_img *img);
+// void	image_check(t_mlx *mlx, t_img *img, t_map *map);
 void	init_image(t_mlx *mlx, t_img *img);
-void	window_image_init(t_mlx *mlx, t_img *img, t_map *map);
+void	window_image_init(t_mlx *mlx, t_img *img, t_map *map,t_anim *anim);
 
 #endif

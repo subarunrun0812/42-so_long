@@ -19,13 +19,16 @@ int	**map_init(t_map *map)
 
 	map_c = (int **)malloc(sizeof(int *) * map->vertical);
 	if (!map_c)
-		error(MALLOC_ERROR);
+		error_map(map->map_data, map->vertical, MALLOC_ERROR);
 	i = 0;
 	while (i < map->vertical)
 	{
 		map_c[i] = (int *)malloc(sizeof(int) * map->width);
 		if (!map_c[i])
-			error(MALLOC_ERROR);
+		{
+			free_mapdata_int(map_c, map->vertical);
+			error_map(map->map_data, map->vertical, MALLOC_ERROR);
+		}
 		ft_bzero(map_c[i], sizeof(int) * map->width);
 		i++;
 	}
@@ -72,7 +75,7 @@ int	check_goal_nav(t_map *map, int **map_c)
 	int	flag;
 
 	y = 1;
-	flag = 0;
+	flag = 1;
 	while (y < map->vertical)
 	{
 		x = 1;
@@ -80,9 +83,9 @@ int	check_goal_nav(t_map *map, int **map_c)
 		{
 			if ((map->map_data[y][x] == 'C' || map->map_data[y][x] == 'E')
 				&& map_c[y][x] != 1)
-				return (0);
+				return (1);
 			if (map->map_data[y][x] == 'E' && map_c[y][x] == 1)
-				flag = 1;
+				flag = 0;
 			x++;
 		}
 		y++;
@@ -101,6 +104,10 @@ void	check_goal(t_map *map)
 	map_c = map_init(map);
 	player_spot(map, &y, &x);
 	goal_nav(map, map_c, y, x);
-	if (check_goal_nav(map, map_c) == 0)
-		error(MAP_ERROR);
+	if (check_goal_nav(map, map_c) == 1)
+	{
+		free_mapdata_int(map_c, map->vertical);
+		error_map(map->map_data, map->vertical, MAP_ERROR);
+	}
+	free_mapdata_int(map_c, map->vertical);
 }

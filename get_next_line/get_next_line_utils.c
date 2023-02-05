@@ -33,6 +33,8 @@ size_t	gnl_strlen(char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 	{
 		i++;
@@ -44,7 +46,7 @@ size_t	gnl_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	len;
 
-	len = gnl_strlen(dst);
+	len = size;
 	if (!dst)
 		return (len);
 	size--;
@@ -77,7 +79,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	else if (s1 == NULL && s2 != NULL)
 		return (gnl_strdup(s2));
 	else if (s1 != NULL && s2 == NULL)
-		return (gnl_strdup(s2));
+		return (gnl_strdup(s1));
 	len1 = gnl_strlen(s1);
 	len2 = gnl_strlen(s2);
 	dst = malloc(sizeof(char) * (len1 + len2 + 1));
@@ -88,6 +90,6 @@ char	*gnl_strjoin(char *s1, char *s2)
 		dst[i++] = *s1++;
 	while (i < len1 + len2)
 		dst[i++] = *s2++;
-	dst[i++] = '\0';
+	dst[i] = '\0';
 	return ((dst));
 }

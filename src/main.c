@@ -17,10 +17,17 @@ int	main(int argc, char **argv)
 	t_map	map;
 	t_mlx	mlx;
 	t_img	img;
+	t_anim	anim;
 
 	if (argc != 2)
 		error(ARGS_ERROR);
-	map = ft_map(argv[1]);
-	draw(&map, &mlx, &img);
-	ft_event(&mlx, &img, &map);
+	ft_map(argv[1], &map);
+	draw(&map, &mlx, &img, &anim);
+	ft_event(&mlx, &img, &map, &anim);
+	exit(0);
 }
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q a.out");
+// }

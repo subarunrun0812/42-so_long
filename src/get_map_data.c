@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	*non_specific_character(char *str)
+int	non_specific_character(char *str)
 {
 	int		i;
 
@@ -21,10 +21,10 @@ void	*non_specific_character(char *str)
 	{
 		if (str[i] != '0' && str[i] != '1' && str[i] != 'C'
 			&& str[i] != 'E' && str[i] != 'P' && str[i] != 'N')
-			error(MAP_ERROR);
+			return (1);
 		i++;
 	}
-	return (NULL);
+	return (0);
 }
 
 char	*check_n(char *str)
@@ -52,15 +52,15 @@ char	*check_n(char *str)
 char	**ft_stradd(char **array, char *new)
 {
 	char	**res;
-	size_t	i;
-	size_t	len;
+	int		i;
+	int		len;
 
 	len = 0;
 	while (array && array[len] != NULL)
 		len++;
 	res = (char **)malloc(sizeof(char *) * (len + 2));
 	if (!res)
-		error(MALLOC_ERROR);
+		error_map(array, len, MALLOC_ERROR);
 	i = 0;
 	while (i < len)
 	{
@@ -69,9 +69,11 @@ char	**ft_stradd(char **array, char *new)
 	}
 	new = check_n(new);
 	if (!new)
-		error(MALLOC_ERROR);
-	res[i] = new;
-	i++;
+	{
+		free_mapdata(array, len);
+		error(MAP_ERROR);
+	}
+	res[i++] = new;
 	res[i] = NULL;
 	free(array);
 	return (res);
@@ -79,57 +81,61 @@ char	**ft_stradd(char **array, char *new)
 
 void	get_map_size(t_map *map)
 {
-	size_t	i;
-	size_t	base_len;
-	size_t	len;
-	size_t	vertical;
-
+	int	i;
+	int	base_len;
+	int	len;
+	int flag;
+	
 	i = 0;
 	len = 0;
-	vertical = 0;
+	flag = 0;
 	base_len = ft_strlen(map->map_data[i]);
-	while (map->map_data[vertical] != NULL)
-		vertical++;
-	while (map->map_data[i] != NULL && i < vertical)
+	while (map->map_data[i])
 	{
 		len = ft_strlen(map->map_data[i]);
 		if (base_len != len)
-		{
-			error(MAP_ERROR);
-			free(map->map_data[i]);
-		}
+			flag = 1;
 		base_len = len;
 		i++;
 	}
 	map->width = len - 1;
 	map->vertical = i;
+	if (flag > 0)
+		error_map(map->map_data, map->vertical, MAP_ERROR);
 }
 
 void	get_map_data(int fd, t_map *map)
 {
 	char	*str;
-	int		is_error;
+	int		error_f;
 
 	str = get_next_line(fd);
 	if (!str)
 		error(MAP_ERROR);
     //TODO:変更した。リークすエラーを解消
-	is_error = 0;
+	error_f = 0;
 	while (str)
 	{
-		if (is_error == 1 || str[0] == '\n')
+		// printf("str = %s\n",str);
+		if (error_f == 1 || str[0] == '\n')
 		{
-			free(str);
-			is_error = 1;
+			// free(str);
+			error_f = 1;
 		}
 		else
 		{
-			non_specific_character(str);
+			if (non_specific_character(str) == 1)
+				error_f = 1;
 			map->map_data = ft_stradd(map->map_data, str);
 		}
 		str = get_next_line(fd);
 	}
-	if (is_error == 1)
+	if (error_f == 1)
+	{
+		free_mapdata(map->map_data, map->vertical);
 		error(MAP_ERROR);
+	}
 	get_map_size(map);
+	// free_mapdata(map->map_data, map->vertical);
+	// exit(1);
 }

@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	filename_check(char *filename)
+static	void	filename_check(char *filename)
 {
 	char	*ber;
 	int		i;
@@ -34,17 +34,22 @@ void	filename_check(char *filename)
 	return ;
 }
 
-t_map	ft_map(char *filename)
+static void		t_map_init(t_map *map)
+{
+	map->map_data = NULL;
+	map->vertical = 0;
+	map->width = 0;
+}
+
+void	ft_map(char *filename, t_map *map)
 {
 	int		fd;
-	t_map	map;
 
-	map.map_data = NULL;
+	t_map_init(map);
 	filename_check(filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		error(FILENAME_ERROR);
-	get_map_data(fd, &map);
-	check_map(&map);
-	return (map);
+	get_map_data(fd, map);
+	check_map(map);
 }

@@ -50,8 +50,13 @@ void	*create_img(t_mlx *mlx, t_data *floor_data, char *filename)
 	pos.x = 0;
 	pos.y = 0;
 	img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, filename, &pos.x, &pos.y);
+	if (!img_ptr)
+		error(MLX_ERROR);
 	img_data.adr = (unsigned int *)mlx_get_data_addr(img_ptr, &img_data.bpp,
 			&img_data.size_line, &img_data.endian);
+	if (!img_data.adr)
+		error(MLX_ERROR);
 	res = compare_image_data(mlx, &img_data, floor_data);
+	mlx_destroy_image(mlx->mlx_ptr, img_ptr);
 	return (res);
 }

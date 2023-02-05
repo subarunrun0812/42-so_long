@@ -1,6 +1,6 @@
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 LIBS = -Lminilibx-linux -lmlx_Linux -L/usr/X11R6/lib -lXext -lX11
 SOURCES_DIR = ./src
 
@@ -9,7 +9,9 @@ SOURCES = $(SOURCES_DIR)/check_goal.c\
 		  $(SOURCES_DIR)/create_img.c\
 		  $(SOURCES_DIR)/close_window.c\
 		  $(SOURCES_DIR)/draw.c\
+		  $(SOURCES_DIR)/error_mapdata.c\
 		  $(SOURCES_DIR)/error.c\
+		  $(SOURCES_DIR)/mlx_error.c\
 		  $(SOURCES_DIR)/event.c\
 		  $(SOURCES_DIR)/get_c_num.c\
 		  $(SOURCES_DIR)/get_map_data.c\

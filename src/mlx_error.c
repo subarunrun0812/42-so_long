@@ -1,0 +1,22 @@
+#include "so_long.h"
+
+void	error_mlx_init(t_map *map)
+{
+	free_mapdata(map->map_data, map->vertical);
+	error(MLX_ERROR);
+}
+
+void	error_win_init(t_mlx *mlx, t_map *map)
+{
+	free_mapdata(map->map_data, map->vertical);
+	mlx_destroy_display(mlx->mlx_ptr);
+	error(MLX_ERROR);
+}
+
+void	error_win_floor(t_mlx *mlx, t_map *map)
+{
+	free_mapdata(map->map_data, map->vertical);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx_destroy_display(mlx->mlx_ptr);
+	error(MLX_ERROR);
+}
