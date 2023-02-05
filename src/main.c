@@ -26,8 +26,3 @@ int	main(int argc, char **argv)
 	ft_event(&mlx, &img, &map, &anim);
 	exit(0);
 }
-
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q a.out");
-// }

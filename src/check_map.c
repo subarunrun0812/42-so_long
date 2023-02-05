@@ -74,20 +74,19 @@ void	check_map_char(t_map *map)
 {
 	t_num	num;
 
-	// num = (t_num *)malloc(sizeof(t_num));
 	num.c_num = 0;
 	num.e_num = 0;
 	num.p_num = 0;
 	count_special_words(&num, map);
 	if (num.c_num < 1 || num.e_num != 1 || num.p_num != 1)
-		error(MAP_ERROR);
+		error_map(map->map_data, map->vertical, MAP_ERROR);
 	return ;
 }
 
 void	check_map(t_map *map)
 {
 	if (map->vertical < 3 || map->width < 3)
-		error(MAP_ERROR);
+		error_map(map->map_data, map->vertical, MAP_ERROR);
 	check_map_char(map);
 	check_map_wall(map);
 	check_goal(map);

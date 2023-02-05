@@ -1,6 +1,6 @@
 NAME = so_long
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBS = -Lminilibx-linux -lmlx_Linux -L/usr/X11R6/lib -lXext -lX11
 SOURCES_DIR = ./src
 
@@ -53,15 +53,5 @@ fclean : clean
 	make -C $(PRINTF_DIR) fclean
 	make -C $(MINILIBX_DIR)  clean 
 	rm -f $(NAME)
-
-# #======== ERROR CASE========
-# error:
-# 	make
-# 	./so_long.a	 maps/err_cannotgoal1.ber
-# 	./so_long.a	 maps/err_cannotgoal2.ber
-# 	./so_long.a	 maps/err_cannotgoal3.ber
-# 	./so_long.a  maps/err_wall.ber
-# 	./so_long.a  maps/err_twoplayer.ber
-# 	./so_long.a  maps/err_coin.ber
 
 re: fclean all

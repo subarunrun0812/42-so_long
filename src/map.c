@@ -20,15 +20,12 @@ static	void	filename_check(char *filename)
 
 	len = ft_strlen(filename);
 	ber = ".ber";
-	//TODO: i = ft_strlken(ber)
 	i = ft_strlen(ber);
-	//strncmpを使った方が分かりやすいかも
 	while (ber[i--] == filename[len--])
 	{
 		if (i == 0)
 			break ;
 	}
-	//TODO: ber[i] != filename[len]
 	if (ber[i] != filename[len])
 		error(FILENAME_ERROR);
 	return ;

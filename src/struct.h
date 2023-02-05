@@ -13,8 +13,6 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include <stdio.h>
-
 typedef struct s_anim
 {
 	int	p_dir;

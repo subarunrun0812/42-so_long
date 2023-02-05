@@ -112,16 +112,11 @@ void	get_map_data(int fd, t_map *map)
 	str = get_next_line(fd);
 	if (!str)
 		error(MAP_ERROR);
-    //TODO:変更した。リークすエラーを解消
 	error_f = 0;
 	while (str)
 	{
-		// printf("str = %s\n",str);
 		if (error_f == 1 || str[0] == '\n')
-		{
-			// free(str);
 			error_f = 1;
-		}
 		else
 		{
 			if (non_specific_character(str) == 1)
@@ -136,6 +131,4 @@ void	get_map_data(int fd, t_map *map)
 		error(MAP_ERROR);
 	}
 	get_map_size(map);
-	// free_mapdata(map->map_data, map->vertical);
-	// exit(1);
 }
