@@ -6,7 +6,7 @@
 /*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:52:19 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/04 16:52:20 by subarunrun       ###   ########.fr       */
+/*   Updated: 2023/02/05 18:19:49 by subarunrun       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ void	destroy_image(t_mlx *mlx, t_img *img);
 void	close_window(t_param *param);
 
 //draw.c
-void	draw(t_map *map, t_mlx *mlx, t_img *img,t_anim *anim);
+void	draw(t_map *map, t_mlx *mlx, t_img *img, t_anim *anim);
 void	draw_map(t_map *map, t_mlx *mlx, t_img *img, t_anim *anim);
 void	draw_one_img(t_param *param, int y, int x);
 void	draw_one_anim_img(t_param *param, int y, int x);
 
 //error_mapdata.c
-void	free_mapdata_int(int **map_data,int vertical);
-void	free_mapdata(char **map_data,int vertical);
+void	free_mapdata_int(int **map_data, int vertical);
+void	free_mapdata(char **map_data, int vertical);
 void	error_map(char **mapdata, int vertical, int error_num);
 
 //error.c
@@ -106,7 +106,7 @@ void	get_map_data(int fd, t_map *map);
 //map.c
 // void	map_init(t_map *map);
 // void	filename_check(char *filename);
-void	ft_map(char *filename,t_map *map);
+void	ft_map(char *filename, t_map *map);
 
 // player_move.c
 void	arrival_img(t_param *param, t_pos *dst, t_pos *pos);
@@ -121,6 +121,6 @@ void	player_steps(t_param *param);
 // int		num_make(t_img *img);
 // void	image_check(t_mlx *mlx, t_img *img, t_map *map);
 void	init_image(t_mlx *mlx, t_img *img);
-void	window_image_init(t_mlx *mlx, t_img *img, t_map *map,t_anim *anim);
+void	window_image_init(t_mlx *mlx, t_img *img, t_map *map, t_anim *anim);
 
 #endif

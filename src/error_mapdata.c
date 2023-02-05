@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_mapdata.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/05 18:16:25 by subarunrun        #+#    #+#             */
+/*   Updated: 2023/02/05 18:16:32 by subarunrun       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_mapdata_int(int **map_data,int vertical)
+void	free_mapdata_int(int **map_data, int vertical)
 {
 	int	i;
 
@@ -16,7 +27,7 @@ void	free_mapdata_int(int **map_data,int vertical)
 	free(map_data);
 }
 
-void	free_mapdata(char **map_data,int vertical)
+void	free_mapdata(char **map_data, int vertical)
 {
 	int	i;
 

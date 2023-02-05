@@ -6,12 +6,11 @@
 /*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:06:54 by subarunrun        #+#    #+#             */
-/*   Updated: 2023/01/30 22:56:05 by subarunrun       ###   ########.fr       */
+/*   Updated: 2023/02/05 18:20:04 by subarunrun       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	init_image(t_mlx *mlx, t_img *img)
 {
@@ -30,7 +29,7 @@ void	init_image(t_mlx *mlx, t_img *img)
 	img->n_img = create_img(mlx, &floor_data, "./src/xpm/gun_devil.xpm");
 }
 
-void	window_image_init(t_mlx *mlx, t_img *img, t_map *map,t_anim *anim)
+void	window_image_init(t_mlx *mlx, t_img *img, t_map *map, t_anim *anim)
 {
 	int	tmp_width;
 	int	tmp_vertical;

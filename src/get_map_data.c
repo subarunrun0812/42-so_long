@@ -6,7 +6,7 @@
 /*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:23:15 by subarunrun        #+#    #+#             */
-/*   Updated: 2023/02/04 16:40:26 by subarunrun       ###   ########.fr       */
+/*   Updated: 2023/02/05 18:18:06 by subarunrun       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,23 @@ char	**ft_stradd(char **array, char *new)
 {
 	char	**res;
 	int		i;
-	int		len;
+	int		vertical;
 
-	len = 0;
-	while (array && array[len] != NULL)
-		len++;
-	res = (char **)malloc(sizeof(char *) * (len + 2));
+	vertical = 0;
+	while (array && array[vertical] != NULL)
+		vertical++;
+	res = (char **)malloc(sizeof(char *) * (vertical + 2));
 	if (!res)
-		error_map(array, len, MALLOC_ERROR);
+		error_map(array, vertical, MALLOC_ERROR);
 	i = 0;
-	while (i < len)
+	while (i < vertical)
 	{
 		res[i] = array[i];
 		i++;
 	}
 	new = check_n(new);
 	if (!new)
-	{
-		free_mapdata(array, len);
-		error(MAP_ERROR);
-	}
+		error_map(array, vertical, MAP_ERROR);
 	res[i++] = new;
 	res[i] = NULL;
 	free(array);
@@ -84,8 +81,8 @@ void	get_map_size(t_map *map)
 	int	i;
 	int	base_len;
 	int	len;
-	int flag;
-	
+	int	flag;
+
 	i = 0;
 	len = 0;
 	flag = 0;

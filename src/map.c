@@ -6,7 +6,7 @@
 /*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:31:23 by subarunrun        #+#    #+#             */
-/*   Updated: 2023/02/04 16:42:30 by subarunrun       ###   ########.fr       */
+/*   Updated: 2023/02/05 18:18:36 by subarunrun       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	void	filename_check(char *filename)
 	return ;
 }
 
-static void		t_map_init(t_map *map)
+static void	t_map_init(t_map *map)
 {
 	map->map_data = NULL;
 	map->vertical = 0;

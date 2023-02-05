@@ -37,7 +37,7 @@ OBJS = $(SOURCES:.c=.o)
 all: $(NAME)
 
 $(NAME) : $(OBJS) $(PRINTF) $(MINILIBX)
-	$(CC) $(OBJS) $(PRINTF) $(LIBS) $(INCLUDE) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(PRINTF) $(LIBS) $(INCLUDE) -o $(NAME)
 
 $(PRINTF) :
 	make -C $(PRINTF_DIR)
