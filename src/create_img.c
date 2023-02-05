@@ -22,7 +22,6 @@ void	*compare_image_data(t_mlx *mlx, t_data *img_data, t_data *floor_data)
 	res = mlx_new_image(mlx->mlx_ptr, SIZE, SIZE);
 	res_data.adr = (unsigned int *)mlx_get_data_addr(res, &res_data.bpp,
 			&res_data.size_line, &res_data.endian);
-	floor_data = floor_data;
 	y = 0;
 	while (y < SIZE)
 	{

@@ -8,7 +8,6 @@ void	free_mapdata_int(int **map_data,int vertical)
 	i = 0;
 	if (vertical < 1)
 		return ;
-	printf("free: free_mapdata_int\n");
 	while (i < vertical)
 	{
 		free(map_data[i]);
@@ -24,7 +23,6 @@ void	free_mapdata(char **map_data,int vertical)
 	i = 0;
 	if (vertical < 1)
 		return ;
-	printf("free: free_mapdata\n");
 	while (i < vertical)
 	{
 		free(map_data[i]);

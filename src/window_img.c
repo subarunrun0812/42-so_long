@@ -19,7 +19,6 @@ void	init_image(t_mlx *mlx, t_img *img)
 
 	floor_data.adr = (unsigned int *)mlx_get_data_addr(img->f_img,
 			&floor_data.bpp, &floor_data.size_line, &floor_data.endian);
-	img->f_img = create_img(mlx, &floor_data, "./src/xpm/grass.xpm");
 	img->w_img = create_img(mlx, &floor_data, "./src/xpm/stone.xpm");
 	img->c_img = create_img(mlx, &floor_data, "./src/xpm/gun.xpm");
 	img->e_close_img = create_img(mlx, &floor_data, "./src/xpm/door.xpm");
@@ -60,102 +59,59 @@ void	window_image_init(t_mlx *mlx, t_img *img, t_map *map,t_anim *anim)
 
 
 
+/*
+static int	num_make(t_img *img)
+{
+	int	num;
 
+	num = 1;
+	if (!img->c_img)
+		num *= 2;
+	if (!img->n_img)
+		num *= 3;
+	if (!img->f_img)
+		num *= 5;
+	if (!img->w_img)
+		num *= 7;
+	if (!img->p_right_img)
+		num *= 11;
+	if (!img->p_left_img)
+		num *= 13;
+	if (!img->e_close_img)
+		num *= 17;
+	if (!img->e_open_img)
+		num *= 19;
+	printf("num = %d\n",num);
+	return (num);
+}
 
+static void	image_check(t_mlx *mlx, t_img *img, t_map *map)
+{
+	int	num;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// int	num_make(t_img *img)
-// {
-// 	int	num;
-
-// 	num = 1;
-// 	if (!img->c_img)
-// 		num *= 2;
-// 	if (!img->n_img)
-// 		num *= 3;
-// 	if (!img->f_img)
-// 		num *= 5;
-// 	if (!img->w_img)
-// 		num *= 7;
-// 	if (!img->p_right_img)
-// 		num *= 11;
-// 	if (!img->p_left_img)
-// 		num *= 13;
-// 	if (!img->e_close_img)
-// 		num *= 17;
-// 	if (!img->e_open_img)
-// 		num *= 19;
-// 	printf("num = %d\n",num);
-// 	return (num);
-// }
-
-// void	image_check(t_mlx *mlx, t_img *img, t_map *map)
-// {
-// 	int	num;
-
-// 	num = num_make(img);
-// 	if (num > 1 && num % 2 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->c_img);
-// 	if (num > 1 && num % 3 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->n_img);
-// 	if (num > 1 && num % 5 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->f_img);
-// 	if (num > 1 && num % 7 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->w_img);
-// 	if (num > 1 && num % 11 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->p_right_img);
-// 	if (num > 1 && num % 13 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->p_left_img);
-// 	if (num > 1 && num % 17 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->e_close_img);
-// 	if (num > 1 && num % 19 != 0)
-// 		mlx_destroy_image(mlx->mlx_ptr, img->e_open_img);
-// 	if (num > 1)
-// 	{
-// 		free_mapdata(map->map_data, map->vertical);
-// 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-// 		mlx_destroy_display(mlx->mlx_ptr);
-// 		error(MLX_ERROR);
-// 	}
-// }
+	num = num_make(img);
+	if (num > 1 && num % 2 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->c_img);
+	if (num > 1 && num % 3 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->n_img);
+	if (num > 1 && num % 5 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->f_img);
+	if (num > 1 && num % 7 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->w_img);
+	if (num > 1 && num % 11 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->p_right_img);
+	if (num > 1 && num % 13 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->p_left_img);
+	if (num > 1 && num % 17 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->e_close_img);
+	if (num > 1 && num % 19 != 0)
+		mlx_destroy_image(mlx->mlx_ptr, img->e_open_img);
+	if (num > 1)
+	{
+		free_mapdata(map->map_data, map->vertical);
+		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_display(mlx->mlx_ptr);
+		error(MLX_ERROR);
+	}
+}
+*/
