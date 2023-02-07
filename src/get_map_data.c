@@ -6,7 +6,7 @@
 /*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 17:23:15 by subarunrun        #+#    #+#             */
-/*   Updated: 2023/02/05 18:18:06 by subarunrun       ###   ########.fr       */
+/*   Updated: 2023/02/07 19:37:36 by subarunrun       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,9 @@ void	get_map_data(int fd, t_map *map)
 	error_f = 0;
 	while (str)
 	{
-		if (error_f == 1 || str[0] == '\n')
+		if (non_specific_character(str) == 1)
 			error_f = 1;
-		else
-		{
-			if (non_specific_character(str) == 1)
-				error_f = 1;
-			map->map_data = ft_stradd(map->map_data, str);
-		}
+		map->map_data = ft_stradd(map->map_data, str);
 		str = get_next_line(fd);
 	}
 	if (error_f == 1)
