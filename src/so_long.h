@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
+/*   By: susasaki <susasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 15:52:19 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/05 18:19:49 by subarunrun       ###   ########.fr       */
+/*   Updated: 2023/06/21 15:10:46 by susasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,19 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include <X11/keysymdef.h>
+
+#if defined(__APPLE__)
+    // macOSの場合の処理
+    # include <mlx.h>
+#elif defined(__unix__)
+    // linuxOSの場合の処理
+    # include <X11/keysymdef.h>
+    # include "../mlx-linux/mlx.h"
+#else
+    #error "Unsupported operating system"
+#endif
+
 # include "../get_next_line/get_next_line.h"
-# include "../minilibx-linux/mlx.h"
 # include "../printf/header/ft_printf.h"
 # include "../printf/libft/libft.h"
 # include "struct.h"

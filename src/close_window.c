@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_window.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subarunrun <subarunrun@student.42.fr>      +#+  +:+       +#+        */
+/*   By: susasaki <susasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:34:36 by susasaki          #+#    #+#             */
-/*   Updated: 2023/02/05 18:15:31 by subarunrun       ###   ########.fr       */
+/*   Updated: 2023/06/21 15:12:04 by susasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	close_window(t_param *param)
 	destroy_image(param->mlx, param->img);
 	free_mapdata(param->map->map_data, param->map->vertical);
 	mlx_destroy_window(param->mlx->mlx_ptr, param->mlx->win_ptr);
-	mlx_destroy_display(param->mlx->mlx_ptr);
+	// mlx_destroy_display(param->mlx->mlx_ptr);
 	free(param->mlx->mlx_ptr);
 	exit(0);
 }

@@ -1,9 +1,15 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LIBS = -Lminilibx-linux -lmlx_Linux -L/usr/X11R6/lib -lXext -lX11
-SOURCES_DIR = ./src
+UNAME_S = $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	LIBS = -Lmlx-linux -lmlx_Linux -L/usr/X11R6/lib -lXext -lX11
+endif
+ifeq ($(UNAME_S),Darwin) #macOS
+	LIBS = -Lmlx-mac -lmlx -framework OpenGL -framework AppKit
+endif
 
+SOURCES_DIR = ./src
 SOURCES = $(SOURCES_DIR)/check_goal.c\
 		  $(SOURCES_DIR)/check_map.c\
 		  $(SOURCES_DIR)/create_img.c\
@@ -28,9 +34,16 @@ PRINTF			= $(PRINTF_DIR)/libftprintf.a
 GNL_DIR			= ./get_next_line
 GNL				= $(GNL_DIR)/get_next_line.a
 
-MINILIBX_DIR	= ./minilibx-linux
-MINILIBX		= $(MINILIBX_DIR)/libmlx.a
-INCLUDE			= -I printf -I minilibx-linux -I /usr/X11R6/inxlude
+ifeq ($(UNAME_S),Linux)
+	MINILIBX_DIR	= ./mlx-linux
+	MINILIBX		= $(MINILIBX_DIR)/libmlx.a
+	INCLUDE = -I printf -I mlx-linux -I /usr/X11R6/inxlude
+endif
+ifeq ($(UNAME_S),Darwin) #macOS
+	MINILIBX_DIR	= ./mlx-mac
+	MINILIBX		= $(MINILIBX_DIR)/libmlx.a
+	INCLUDE = -I printf -I $(MINILIBX_DIR)
+endif
 
 OBJS = $(SOURCES:.c=.o)
 
